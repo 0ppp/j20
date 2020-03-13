@@ -1,0 +1,185 @@
+
+Slip 20_1. Write a program to create package “TY” which has a class TYmarks( computer total, maths total, electronics total). Create another package “TY” which has a class TYmarks (Theory, Practical). Create “n” object of student class having roll number, name, SY Marks and TY Marks. Add the Marks of SY and TY computer subject and calculate grade (‘A’ for>=70,’B’ for>=60,’C’ for >=50, “Pass Class” for >=40 else “Fail”) and display the result of the student in proper format.
+
+package SY;
+
+public class SYMarks
+{
+                int ct,mt,et;
+                public SYMarks(int ct,int mt,int et)
+                {
+                                this.ct=ct;
+                                this.mt=mt;
+                                this.et=et;
+                }
+                public void display()
+                {
+                                System.out.println("\nMarks are;");
+                                System.out.println("Computer\tMaths\tElectronics");
+                                System.out.println(ct+"\t"+mt+"\t"+et);
+                }
+}
+               
+package TY;
+
+public class TYMarks
+{
+                int Theory,Practicals;
+                public TYMarks(int Theory,int Practicals)
+                {
+                                this.Theory=Theory;
+                                this.Practicals=Practicals;
+                }
+                public void display()
+                {
+                                System.out.println("\nMarks are:");
+                                System.out.println("Theory\tPracticals");
+                                System.out.println(Theory+"\t"+Practicals);
+                }
+}
+
+
+/* slip 20_1 */
+import SY.SYMarks;
+import TY.TYMarks;
+import java.io.*;
+
+class Slip20_1
+{
+                int rollno;
+                int ComputerTotal, MathsTotal, ElecTotal, Theory, Practicals,total;
+                String name;
+                static BufferedReader br =new BufferedReader(new InputStreamReader(System.in));
+
+
+                public Slip20_1()
+                {}
+
+                public Slip20_1(int rollno,String name) throws Exception
+                {
+                                this.rollno = rollno;
+                                this.name = name;
+                               
+                                System.out.println("Enter SY marks: ");
+                               
+                                System.out.println("\nEnter computer marks");
+                                ComputerTotal = Integer.parseInt(br.readLine());
+                               
+                                while((ComputerTotal<0 || ComputerTotal>100))
+                                {
+                                                System.out.println("Invalid marks.....");
+                                               
+                                                System.out.println("Please ReEnter the marks: ");
+                                                ComputerTotal = Integer.parseInt(br.readLine());
+                                }
+                               
+                                System.out.println("Enter maths marks");
+                                MathsTotal=Integer.parseInt(br.readLine());
+                               
+                                while((MathsTotal<0 || MathsTotal>100))
+                {
+                System.out.println("Invalid marks.....");
+                                               
+                                                System.out.println("Please Reenter the marks: ");
+                       MathsTotal=Integer.parseInt(br.readLine());
+                                }
+
+                                System.out.println("Enter electronics marks");
+                                ElecTotal = Integer.parseInt(br.readLine());
+                               
+                                while((ElecTotal<0 || ElecTotal>100))
+                {
+                                System.out.println("Invalid marks.....");
+                                               
+                                                System.out.println("Please Reenter the marks: ");
+                                ElecTotal = Integer.parseInt(br.readLine());
+                }
+
+                                SYMarks sy = new SYMarks(ComputerTotal, MathsTotal, ElecTotal);
+
+                                System.out.print("Enter TY marks: ");
+                               
+                                System.out.print("Enter theory marks ");
+                                Theory = Integer.parseInt(br.readLine());
+                               
+                                while((Theory<0 || Theory>100))
+                 {
+               System.out.println("Invalid marks.....");
+                                                System.out.println("Please Reenter the marks: ");
+               Theory = Integer.parseInt(br.readLine());
+                }
+
+                                System.out.print("Enter practicals marks ");
+                                Practicals = Integer.parseInt(br.readLine());
+                               
+                                while((Practicals<0 || Practicals>100))
+                {
+                                System.out.println("Invalid marks.....");
+                               
+                                                System.out.println("Please Reenter the marks: ");
+                                                Practicals = Integer.parseInt(br.readLine());
+                }
+
+                                TYMarks ty = new TYMarks(Theory, Practicals);
+               
+                }
+                public void CalculateGrade()
+                {             
+                                double percentage;
+                               
+                                total = (ComputerTotal+ MathsTotal + ElecTotal + Theory + Practicals);
+                                percentage=total/5;
+                                System.out.println("Total Marks : \t"+total);
+                                if(percentage >= 70)
+                                System.out.println("Grade:A");
+                               
+                                else if(percentage >= 60)
+                System.out.println("Grade:B");
+                               
+                                else if(percentage >= 50)
+                System.out.println("Grade:C");
+                               
+                                else if(percentage >= 40)
+                System.out.println("Grade:PASS");
+                                else
+                                System.out.println("Grade:FAIL");
+                                System.out.println("=============================");
+                }
+               
+                public void display()
+                {
+                                System.out.println("Name of Student : "+name);
+                                System.out.println("Computer Total : "+ ComputerTotal+"\nMaths Total : "+MathsTotal+"\nElectronic Total : \t"+ElecTotal);
+                                System.out.println("Theory Mark : "+Theory+"\nPractical Mark : "+Practicals);
+                               
+                               
+                }
+                               
+                public static void main(String args[]) throws Exception
+                {
+               
+                                System.out.println("Enter number of students: ");
+                                int no=Integer.parseInt(br.readLine());
+                               
+                                Slip20_1 ob[]=new Slip20_1[no];
+                               
+                                for(int i=0; i<no; i++)
+                                {
+                                                System.out.println("Enter roll no: ");
+                                                int r = Integer.parseInt(br.readLine());
+               
+                                                System.out.println("Enter name: ");
+                                                String nm = br.readLine();
+                                               
+                                                ob[i] = new Slip20_1(r,nm);
+                                }
+                                for(int i=0; i<no; i++)
+                                {             
+                                                ob[i].display();
+                                                ob[i].CalculateGrade();
+                                }
+                               
+                               
+                                //st.getdata();
+                }
+}
